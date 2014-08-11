@@ -609,6 +609,7 @@ Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 "Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic.git'
+Plugin 'scrooloose/nerdtree.git'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -650,6 +651,49 @@ filetype plugin indent on    " required
 let g:SuperTabDefaultCompletionType="context"   
 
 
+
+
+"""""""""""""""""""""""""""""""""" 
+" plugin NERDTree
+"""""""""""""""""""""""""""""""""" 
+" shortcut to open NERDTree
+map <C-t> :NERDTreeToggle<CR>
+
+" open a NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
+
+"""""""""""""""""""""""""""""""""" 
+" 
+"""""""""""""""""""""""""""""""""" 
+
+
+
+
+"""""""""""""""""""""""""""""""""" 
+" 
+"""""""""""""""""""""""""""""""""" 
+
+
+
+
+"""""""""""""""""""""""""""""""""" 
+" 
+"""""""""""""""""""""""""""""""""" 
+
+
+
+"""""""""""""""""""""""""""""""""" 
+" 
+"""""""""""""""""""""""""""""""""" 
 
 
 """""""""""""""""""""""""""""""""" 
