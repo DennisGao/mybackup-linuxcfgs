@@ -38,7 +38,7 @@ set novisualbell    " 不要闪烁(不明白)
 
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
 
-set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
+set laststatus=2   " 启动显示状态行(1),总是显示状态行(2)  
 
 set foldenable      " 允许折叠  
 
@@ -610,6 +610,7 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
+Plugin 'Lokaltog/vim-powerline.git'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -660,11 +661,11 @@ let g:SuperTabDefaultCompletionType="context"
 map <C-t> :NERDTreeToggle<CR>
 
 " open a NERDTree automatically when vim starts up
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 
 " open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -672,9 +673,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 
 """""""""""""""""""""""""""""""""" 
-" 
+" powerline
 """""""""""""""""""""""""""""""""" 
-
+ "powerline{
+set guifont=Powerline " Symbols for Powerline
+set nocompatible
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+let g:Powerline_symbols = 'fancy'
+ "}
 
 
 
