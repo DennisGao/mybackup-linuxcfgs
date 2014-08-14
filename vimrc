@@ -1,3 +1,4 @@
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 显示相关  
@@ -18,13 +19,13 @@ set go=             " 不要图形按钮
 
 set guifont=Courier_New:h10:cANSI   " 设置字体  
 
-"syntax on           " 语法高亮  
+syntax on           " 语法高亮  
 
 autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 
-"set ruler           " 显示标尺  
+set ruler           " 显示标尺  
 
 set showcmd         " 输入的命令显示出来，看的清楚些  
 
@@ -36,7 +37,7 @@ set showcmd         " 输入的命令显示出来，看的清楚些
 
 set novisualbell    " 不要闪烁(不明白)  
 
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
 
 set laststatus=2   " 启动显示状态行(1),总是显示状态行(2)  
 
@@ -60,7 +61,8 @@ endif
 
 " 设置配色方案
 
-"colorscheme murphy
+set t_Co=256
+colorscheme candy
 
 "字体 
 
@@ -99,57 +101,31 @@ func SetTitle()
     "如果文件类型为.sh文件 
 
     if &filetype == 'sh' 
-
         call setline(1,"\#########################################################################") 
-
         call append(line("."), "\# File Name: ".expand("%")) 
-
         call append(line(".")+1, "\# Author: DennisGao") 
-
         call append(line(".")+2, "\# mail: DennisGao") 
-
         call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-
         call append(line(".")+4, "\#########################################################################") 
-
         call append(line(".")+5, "\#!/bin/bash") 
-
         call append(line(".")+6, "") 
-
     else 
-
         call setline(1, "/*************************************************************************") 
-
         call append(line("."), "    > File Name: ".expand("%")) 
-
         call append(line(".")+1, "    > Author: DennisGao") 
-
         call append(line(".")+2, "    > Mail: DennisGao ") 
-
         call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
-
         call append(line(".")+4, " ************************************************************************/") 
-
         call append(line(".")+5, "")
-
     endif
-
     if &filetype == 'cpp'
-
         call append(line(".")+6, "#include<iostream>")
-
         call append(line(".")+7, "using namespace std;")
-
         call append(line(".")+8, "")
-
     endif
-
     if &filetype == 'c'
-
         call append(line(".")+6, "#include<stdio.h>")
-
         call append(line(".")+7, "")
-
     endif
 
     "新建文件后，自动定位到文件末尾
@@ -164,13 +140,9 @@ endfunc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
 nmap <leader>w :w!<cr>
 
 nmap <leader>f :find<cr>
-
-
 
 " 映射全选+复制 ctrl+a
 
@@ -394,7 +366,7 @@ set helplang=cn
 
 " 我的状态行显示的内容（包括文件类型和解码）
 
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 
 "set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 
@@ -470,13 +442,9 @@ set matchtime=1
 
 set scrolloff=3
 
-" 为C程序提供自动缩进
+" 为c程序提供自动缩进
 
 set smartindent
-
-" 高亮显示普通txt文件（需要txt.vim脚本）
-
-au BufRead,BufNewFile *  setfiletype txt
 
 "自动补全
 
@@ -534,7 +502,7 @@ let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags
 
 let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
 
-autocmd FileType java set tags+=D:\tools\java\tags  
+"autocmd FileType java set tags+=D:\tools\java\tags  
 
 "autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
 
@@ -610,7 +578,6 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'Lokaltog/vim-powerline.git'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
