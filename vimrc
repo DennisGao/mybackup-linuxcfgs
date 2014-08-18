@@ -88,54 +88,6 @@ set fileencoding=utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
-
-""定义函数SetTitle，自动插入文件头 
-
-func SetTitle() 
-
-    "如果文件类型为.sh文件 
-
-    if &filetype == 'sh' 
-        call setline(1,"\#########################################################################") 
-        call append(line("."), "\# File Name: ".expand("%")) 
-        call append(line(".")+1, "\# Author: DennisGao") 
-        call append(line(".")+2, "\# mail: DennisGao") 
-        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-        call append(line(".")+4, "\#########################################################################") 
-        call append(line(".")+5, "\#!/bin/bash") 
-        call append(line(".")+6, "") 
-    else 
-        call setline(1, "/*************************************************************************") 
-        call append(line("."), "    > File Name: ".expand("%")) 
-        call append(line(".")+1, "    > Author: DennisGao") 
-        call append(line(".")+2, "    > Mail: DennisGao ") 
-        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
-        call append(line(".")+4, " ************************************************************************/") 
-        call append(line(".")+5, "")
-    endif
-    if &filetype == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-    endif
-
-    "新建文件后，自动定位到文件末尾
-
-    autocmd BufNewFile * normal G
-
-endfunc 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "键盘命令
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -578,6 +530,7 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
+Plugin 'Valloric/YouCompleteMe.git'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -652,9 +605,78 @@ let g:Powerline_symbols = 'fancy'
 
 
 
-"""""""""""""""""""""""""""""""""" 
-" 
-"""""""""""""""""""""""""""""""""" 
+"""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 新建文件，自动插入文件头 
+
+autocmd BufNewFile *.c,*.py,*.cpp,*.h,*.sh,*.java exec ":call SetTitle()" 
+
+" 定义函数SetTitle，自动插入文件头 
+
+func SetTitle() 
+    let l:var1 = 1
+    if &filetype == 'sh' || &filetype == 'python'
+        call setline(var1,		 "\#########################################################################") 
+        call append(line("."), 	 "\# File Name:\t\t".expand("%")) 
+        call append(line(".")+var1, "\# Author:\t\tDennisGao") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "\# mail:\t\t\tDennisGao") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "\# Created Time:\t\t".strftime("%Y/%m/%d %H:%M:%S")) 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "\# Last modified:\t".strftime("%Y/%m/%d %H:%M:%S")) 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "\#########################################################################") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "") 
+    else 
+        call setline(1, 	 "/************************************************************************") 
+        call append(line("."),	 " * File Name:\t".expand("%")) 
+        call append(line(".")+var1, " * Author:\t\tDennisGao") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, " * Mail:\t\tDennisGao ") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, " * Created Time:\t".strftime("%Y/%m/%d %H:%M:%S")) 
+	let l:var1 = var1+1
+        call append(line(".")+var1, " * Last modified:\t".strftime("%Y/%m/%d %H:%M:%S")) 
+	let l:var1 = var1+1
+        call append(line(".")+var1, " ***********************************************************************/") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "")
+    endif
+
+    if &filetype == 'cpp'
+	let l:var1 = var1+1
+        call append(line(".")+var1, "#include<iostream>")
+	let l:var1 = var1+1
+        call append(line(".")+var1, "using namespace std;")
+	let l:var1 = var1+1
+        call append(line(".")+var1, "")
+    elseif &filetype == 'c'
+	let l:var1 = var1+1
+        call append(line(".")+var1, "#include<stdio.h>")
+	let l:var1 = var1+1
+	call append(line(".")+var1, "")
+    elseif &filetype == 'sh'
+	let l:var1 = var1+1
+        call append(line(".")+var1, "\#!/bin/bash") 
+	let l:var1 = var1+1
+        call append(line(".")+var1, "") 
+    elseif &filetype == 'python'
+	let l:var1 = var1+1
+        call append(line(".")+var1, "#!/usr/bin/env python")
+	let l:var1 = var1+1
+        call append(line(".")+var1, "# -*- coding: utf-8 -*-")
+	let l:var1 = var1+1
+	call append(line(".")+var1, "")
+    endif
+
+endfunc 
+
+" 新建文件后，自动定位到文件末尾
+autocmd BufNewFile * normal G
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 
