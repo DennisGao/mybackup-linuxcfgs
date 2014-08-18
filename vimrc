@@ -619,71 +619,98 @@ func SetTitle()
         call setline(1,				"\#########################################################################") 
         call append(line("."),		"\# File Name:\t\t".expand("%")) 
         call append(line(".")+var1,	"\# Author:\t\tDennisGao") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\# mail:\t\t\tDennisGao") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\# Created Time:\t\t".strftime("%Y/%m/%d %H:%M:%S")) 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\# Last modified:\t".strftime("%Y/%m/%d %H:%M:%S")) 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\#########################################################################") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "") 
     else 
         call setline(1,				"/************************************************************************") 
         call append(line("."),		" * File Name:\t".expand("%")) 
         call append(line(".")+var1, " * Author:\t\tDennisGao") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
 	    call append(line(".")+var1, " * Mail:\t\tDennisGao ") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, " * Created Time:\t".strftime("%Y/%m/%d %H:%M:%S")) 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, " * Last modified:\t".strftime("%Y/%m/%d %H:%M:%S")) 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, " ***********************************************************************/") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "")
     endif
 
     if &filetype == 'cpp'
-		let l:var1 = var1+1
-        call append(line(".")+var1, "#include<iostream>")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "using namespace std;")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "int main(int argc, char** argv)")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "{")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "\treturn 0;")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "}")
-		let l:var1 = var1+1
-        call append(line(".")+var1, "")
+        if expand("%:e") == 'h'
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#ifndef _".toupper(expand("%:t:r"))."_H_")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#define _".toupper(expand("%:t:r"))."_H_")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#ifdef __cplusplus")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "extern \"C\"")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "{")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#endif")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#ifdef __cplusplus")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "}")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#endif")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#endif //".toupper(expand("%:t:r"))."_H_")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "")
+        else
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#include<iostream>")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "using namespace std;")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "int main(int argc, char** argv)")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "{")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "\treturn 0;")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "}")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "")
+        endif
     elseif &filetype == 'c'
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "#include<stdio.h>")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "int main(int argc, char** argv)")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "{")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\treturn 0;")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "}")
-		let l:var1 = var1+1
-		call append(line(".")+var1, "")
+        let l:var1 = var1+1
+        call append(line(".")+var1, "")
     elseif &filetype == 'sh'
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\#!/bin/bash") 
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "") 
     elseif &filetype == 'python'
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\#!/usr/bin/env python")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
         call append(line(".")+var1, "\# -*- coding: utf-8 -*-")
-		let l:var1 = var1+1
+        let l:var1 = var1+1
 	call append(line(".")+var1, "")
     endif
 
