@@ -673,7 +673,9 @@ func SetTitle()
             call append(line(".")+var1, "")
         else
             let l:var1 = var1+1
-            call append(line(".")+var1, "#include<iostream>")
+            call append(line(".")+var1, "#include <iostream>")
+            let l:var1 = var1+1
+            call append(line(".")+var1, "#include \"".expand("%:t:r").".h\"")
             let l:var1 = var1+1
             call append(line(".")+var1, "using namespace std;")
             let l:var1 = var1+1
@@ -689,7 +691,9 @@ func SetTitle()
         endif
     elseif &filetype == 'c'
         let l:var1 = var1+1
-        call append(line(".")+var1, "#include<stdio.h>")
+        call append(line(".")+var1, "#include <stdio.h>")
+        let l:var1 = var1+1
+        call append(line(".")+var1, "#include \"".expand("%:t:r").".h\"")
         let l:var1 = var1+1
         call append(line(".")+var1, "int main(int argc, char** argv)")
         let l:var1 = var1+1
@@ -711,7 +715,15 @@ func SetTitle()
         let l:var1 = var1+1
         call append(line(".")+var1, "\# -*- coding: utf-8 -*-")
         let l:var1 = var1+1
-	call append(line(".")+var1, "")
+		call append(line(".")+var1, "")
+        let l:var1 = var1+1
+		call append(line(".")+var1, "' module description '")
+        let l:var1 = var1+1
+		call append(line(".")+var1, "")
+        let l:var1 = var1+1
+        call append(line(".")+var1, "__author__ = 'DennisGao'")
+        let l:var1 = var1+1
+		call append(line(".")+var1, "")
     endif
 
 endfunc 
